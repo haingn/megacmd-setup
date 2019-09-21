@@ -9,22 +9,12 @@ if [ -z "$1" ]; then
     echo "./install.sh <your_authtoken>"
     exit 1
 fi
-
-mkdir -p /opt/ngrok
-
-cd ngrok-setup
-wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
-unzip ngrok-stable-linux-arm.zip
-
-cp ngrok /opt/ngrok/
-chmod +x /opt/ngrok/ngrok
-cp uninstall.sh /opt/ngrok/
-cp ngrok.service /lib/systemd/system/
-cp ngrok.yml /opt/ngrok/
-sed -i "s/<add_your_token_here>/$1/g" /opt/ngrok/ngrok.yml
-
-systemctl enable ngrok.service
-systemctl start ngrok.service
-systemctl status ngrok.service
-
+apt-get update && apt-get upgrade
+apt install libc-ares2 libcrypto++6 libpcrecpp0v5 libmediainfo0v5 libzen0v5
+apt --fix-broken install
+wget https://mega.nz/linux/MEGAsync/Raspbian_10.0/arm/megacmd-Raspbian_10.0_armhf.deb
+dpkg -i megacmd-Raspbian_10.0_armhf.deb
+touch /etc/profile.d/startup.sh
+echo'mega-sync'>>/etc/profile.d/startup.sh
+sed -i "s/<add_your_token_here>/$1/g" mega-login
 cd ~/
