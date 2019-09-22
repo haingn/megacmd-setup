@@ -10,7 +10,7 @@ if [ -z "$1" ]; then
     exit 1
 fi
 apt-get update && apt-get upgrade -y
-apt install libc-ares2 libcrypto++6 libpcrecpp0v5 libmediainfo0v5 libzen0v5
+apt install libc-ares2 libcrypto++6 libpcrecpp0v5 libmediainfo0v5 libzen0v5 -y
 apt --fix-broken install -y
 wget https://mega.nz/linux/MEGAsync/Raspbian_10.0/arm/megacmd-Raspbian_10.0_armhf.deb
 dpkg -i megacmd-Raspbian_10.0_armhf.deb -y
